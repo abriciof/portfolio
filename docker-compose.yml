@@ -1,0 +1,64 @@
+version: "3"
+services:
+  db:
+    container_name: database
+    image: mysql:latest
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - ${MYSQL_PORT}:3306
+    networks:
+      - portfolio
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+  # backend:
+  #   container_name: backend_loja
+  #   build: ./backend
+  #   restart: always
+  #   volumes:
+  #     - ./backend/src:/app/src
+  #     - ./backend/prisma:/app/prisma
+  #   networks:
+  #     - portfolio
+  #   ports:
+  #     - 4466:4466
+  #   environment:
+  #     - DATABASE_URL=mysql://root:fabricio@db:3306/loja
+  #   depends_on:
+  #     - db
+
+  # frontend:
+  #   container_name: frontend_loja
+  #   build: ./frontend
+  #   volumes:
+  #     - ./frontend/src:/app/src
+  #   networks:
+  #     - portfolio
+  #   ports:
+  #     - 4477:4477
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    networks:
+      - portfolio
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
+      - PMA_ARBITRARY=1
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
+networks:
+  portfolio:
+    driver: bridge

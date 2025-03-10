@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Projeto {
+  id          String                        @id @default(uuid()) @db.Char(36)
+  titulo      String                        @unique @db.VarChar(255)
+  descricao   String                        @db.VarChar(500)
+  ano         Int                           @db.Int()
+  createdAt   DateTime                      @default(now()) @map("created_at")
+  updatedAt   DateTime                      @updatedAt @map("updated_at")
+  tecnologias TecnologiaProjeto[]
+  linguagens  LinguagemProgramacaoProjeto[]
+  areas       AreaConhecimentoProjeto[]
+
+  @@map("projetos")
+}
+
+model Tecnologia {
+  id        String              @id @default(uuid()) @db.Char(36)
+  nome      String              @db.Char(255)
+  versao    String?             @db.Char(50)
+  createdAt DateTime            @default(now()) @map("created_at")
+  updatedAt DateTime            @updatedAt @map("updated_at")
+  projetos  TecnologiaProjeto[]
+
+  @@map("tecnologias")
+}
+
+model LinguagemProgramacao {
+  id        String                        @id @default(uuid()) @db.Char(36)
+  nome      String                        @db.Char(255)
+  versao    String?                       @db.Char(50)
+  createdAt DateTime                      @default(now()) @map("created_at")
+  updatedAt DateTime                      @updatedAt @map("updated_at")
+  projetos  LinguagemProgramacaoProjeto[]
+
+  @@map("linguagens_programacao")
+}
+
+model AreaConhecimento {
+  id        String                    @id @default(uuid()) @db.Char(36)
+  nome      String                    @db.Char(255)
+  versao    String?                   @db.Char(50)
+  createdAt DateTime                  @default(now()) @map("created_at")
+  updatedAt DateTime                  @updatedAt @map("updated_at")
+  projetos  AreaConhecimentoProjeto[]
+
+  @@map("areas_conhecimento")
+}
+
+model TecnologiaProjeto {
+  projeto      Projeto    @relation(fields: [projetoId], references: [id])
+  projetoId    String     @db.Char(36)
+  tecnologia   Tecnologia @relation(fields: [tecnologiaId], references: [id])
+  tecnologiaId String     @db.Char(36)
+
+  @@id([projetoId, tecnologiaId])
+  @@map("tecnologias_projetos")
+}
+
+model LinguagemProgramacaoProjeto {
+  projeto     Projeto              @relation(fields: [projetoId], references: [id])
+  projetoId   String               @db.Char(36)
+  linguagem   LinguagemProgramacao @relation(fields: [linguagemId], references: [id])
+  linguagemId String               @db.Char(36)
+
+  @@id([projetoId, linguagemId])
+  @@map("linguagens_programacao_projetos")
+}
+
+model AreaConhecimentoProjeto {
+  projeto   Projeto          @relation(fields: [projetoId], references: [id])
+  projetoId String           @db.Char(36)
+  area      AreaConhecimento @relation(fields: [areaId], references: [id])
+  areaId    String           @db.Char(36)
+
+  @@id([projetoId, areaId])
+  @@map("areas_conhecimento_projetos")
+}
