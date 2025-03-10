@@ -16,7 +16,7 @@
         "tags": [
           "Projeto"
         ],
-        "summary": "Recupera os dados de todos os projetos da base de dados.",
+        "summary": "Recupera os dados de todos os projetos.",
         "description": "",
         "parameters": [
           {
@@ -40,7 +40,7 @@
         "tags": [
           "Projeto"
         ],
-        "summary": "Adiciona um novo projeto na base de dados.",
+        "summary": "Adiciona um novo projeto.",
         "description": "",
         "parameters": [
           {
@@ -57,6 +57,81 @@
               "$ref": "#/definitions/Projeto"
             },
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/projeto/{id}": {
+      "get": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Recupera um projeto específico.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do projeto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Projeto"
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Atualiza dados um projeto específico.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do projeto"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateProjetoDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Projeto"
+        ],
+        "summary": "Torna um projeto inativo.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do produto"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
@@ -93,6 +168,23 @@
       }
     },
     "CreateProjetoDto": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string",
+          "example": "Aplicação Mobile"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Criação de um aplicativo de Serviços de um Hotel"
+        },
+        "ano": {
+          "type": "number",
+          "example": 2021
+        }
+      }
+    },
+    "UpdateProjetoDto": {
       "type": "object",
       "properties": {
         "titulo": {

@@ -22,6 +22,11 @@ const doc = {
             titulo: "Aplicação Mobile",
             descricao: "Criação de um aplicativo de Serviços de um Hotel",
             ano: 2021
+        },
+        UpdateProjetoDto: {
+            titulo: "Aplicação Mobile",
+            descricao: "Criação de um aplicativo de Serviços de um Hotel",
+            ano: 2021
         }
     }
 };

@@ -18,6 +18,7 @@ model Projeto {
   titulo      String                        @unique @db.VarChar(255)
   descricao   String                        @db.VarChar(500)
   ano         Int                           @db.Int()
+  ativo Boolean @default(true)
   createdAt   DateTime                      @default(now()) @map("created_at")
   updatedAt   DateTime                      @updatedAt @map("updated_at")
   tecnologias TecnologiaProjeto[]
@@ -31,6 +32,7 @@ model Tecnologia {
   id        String              @id @default(uuid()) @db.Char(36)
   nome      String              @db.Char(255)
   versao    String?             @db.Char(50)
+  ativo Boolean @default(true)
   createdAt DateTime            @default(now()) @map("created_at")
   updatedAt DateTime            @updatedAt @map("updated_at")
   projetos  TecnologiaProjeto[]
@@ -42,6 +44,7 @@ model LinguagemProgramacao {
   id        String                        @id @default(uuid()) @db.Char(36)
   nome      String                        @db.Char(255)
   versao    String?                       @db.Char(50)
+  ativo Boolean @default(true)
   createdAt DateTime                      @default(now()) @map("created_at")
   updatedAt DateTime                      @updatedAt @map("updated_at")
   projetos  LinguagemProgramacaoProjeto[]
@@ -53,6 +56,7 @@ model AreaConhecimento {
   id        String                    @id @default(uuid()) @db.Char(36)
   nome      String                    @db.Char(255)
   versao    String?                   @db.Char(50)
+  ativo Boolean @default(true)
   createdAt DateTime                  @default(now()) @map("created_at")
   updatedAt DateTime                  @updatedAt @map("updated_at")
   projetos  AreaConhecimentoProjeto[]
