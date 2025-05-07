@@ -90,7 +90,7 @@
         "tags": [
           "Projeto"
         ],
-        "summary": "Atualiza dados um projeto específico.",
+        "summary": "Atualiza dados de um projeto específico.",
         "description": "",
         "parameters": [
           {
@@ -126,7 +126,132 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "ID do produto"
+            "description": "ID do projeto"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/tecnologia/": {
+      "get": {
+        "tags": [
+          "Tecnologia"
+        ],
+        "summary": "Recupera os dados de todos as tecnologias.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tecnologia"
+        ],
+        "summary": "Adiciona uma nova tecnologia.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateTecnologiaDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Tecnologia"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/tecnologia/{id}": {
+      "get": {
+        "tags": [
+          "Tecnologia"
+        ],
+        "summary": "Recupera uma tecnologia específica.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da tecnologia"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Tecnologia"
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tecnologia"
+        ],
+        "summary": "Atualiza dados de uma tecnologia específica.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da tecnologia"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateTecnologiaDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tecnologia"
+        ],
+        "summary": "Torna uma tecnologia inativa.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da tecnologia"
           }
         ],
         "responses": {
@@ -156,6 +281,10 @@
         "ano": {
           "type": "number",
           "example": 2021
+        },
+        "ativo": {
+          "type": "boolean",
+          "example": true
         },
         "createdAt": {
           "type": "string",
@@ -198,6 +327,61 @@
         "ano": {
           "type": "number",
           "example": 2021
+        }
+      }
+    },
+    "Tecnologia": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+        },
+        "nome": {
+          "type": "string",
+          "example": ".NET"
+        },
+        "versao": {
+          "type": "string",
+          "example": "8.0"
+        },
+        "ativo": {
+          "type": "boolean",
+          "example": true
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-11-07T19:27:15.645Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-11-07T19:27:15.645Z"
+        }
+      }
+    },
+    "CreateTecnologiaDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": ".NET"
+        },
+        "versao": {
+          "type": "string",
+          "example": "8.0"
+        }
+      }
+    },
+    "UpdateTecnologiaDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": ".NET"
+        },
+        "versao": {
+          "type": "string",
+          "example": "8.0"
         }
       }
     }

@@ -15,8 +15,9 @@ const doc = {
             titulo: "Aplicação Mobile",
             descricao: "Criação de um aplicativo de Serviços de um Hotel",
             ano: 2021,
+            ativo: true,
             createdAt: "2021-11-07T19:27:15.645Z",
-            updatedAt: "2021-11-07T19:27:15.645Z",
+            updatedAt: "2021-11-07T19:27:15.645Z"
         },
         CreateProjetoDto: {
             titulo: "Aplicação Mobile",
@@ -27,7 +28,23 @@ const doc = {
             titulo: "Aplicação Mobile",
             descricao: "Criação de um aplicativo de Serviços de um Hotel",
             ano: 2021
-        }
+        },
+        Tecnologia: {
+            id: "8a2053de-5d92-4c43-97c0-c9b2b0d56703",
+            nome: ".NET",
+            versao: "8.0",
+            ativo: true,
+            createdAt: "2021-11-07T19:27:15.645Z",
+            updatedAt: "2021-11-07T19:27:15.645Z"
+        },
+        CreateTecnologiaDto: {
+            nome: ".NET",
+            versao: "8.0"
+        },
+        UpdateTecnologiaDto: {
+            nome: ".NET",
+            versao: "8.0"
+        },
     }
 };
 
