@@ -1,8 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "API do Portfólio do Fabrício Guimarães",
+    "title": "API do Portfólio - Fabrício Guimarães",
     "description": "Documentação da API",
+    "autor": "Fabrício Guimarães",
+    "email": "fdcg@icomp.ufam.edu.br",
     "version": "1.0.0"
   },
   "host": "localhost:4444",
@@ -260,6 +262,256 @@
           }
         }
       }
+    },
+    "/v1/linguagemprogramacao/": {
+      "get": {
+        "tags": [
+          "Linguagem de Programação"
+        ],
+        "summary": "Recupera os dados de todos as linguagens de programação.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Linguagem de Programação"
+        ],
+        "summary": "Adiciona uma nova linguagem de programação.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateLinguagemProgramacaoDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LinguagemProgramacao"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/linguagemprogramacao/{id}": {
+      "get": {
+        "tags": [
+          "Linguagem de Programação"
+        ],
+        "summary": "Recupera uma linguagem de programação específica.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da linguagem de programação"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LinguagemProgramacao"
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Linguagem de Programação"
+        ],
+        "summary": "Atualiza dados de uma linguagem de programação específica.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da linguagem de programação"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateLinguagemProgramacaoDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Linguagem de Programação"
+        ],
+        "summary": "Torna uma linguagem de programação inativa.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da linguagem de programação"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/areaconhecimento/": {
+      "get": {
+        "tags": [
+          "Área de Conhecimento"
+        ],
+        "summary": "Recupera os dados de todos as áreas de conhecimento.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Área de Conhecimento"
+        ],
+        "summary": "Adiciona uma nova área de conhecimento.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateAreaConhecimentoDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AreaConhecimento"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/areaconhecimento/{id}": {
+      "get": {
+        "tags": [
+          "Área de Conhecimento"
+        ],
+        "summary": "Recupera uma área de conhecimento específica.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da área de conhecimento"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AreaConhecimento"
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Área de Conhecimento"
+        ],
+        "summary": "Atualiza dados de uma área de conhecimento específica.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da área de conhecimento"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateAreaConhecimentoDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Área de Conhecimento"
+        ],
+        "summary": "Torna uma área de conhecimento inativa.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da área de conhecimento"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -382,6 +634,116 @@
         "versao": {
           "type": "string",
           "example": "8.0"
+        }
+      }
+    },
+    "LinguagemProgramacao": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Python"
+        },
+        "versao": {
+          "type": "string",
+          "example": "3.12"
+        },
+        "ativo": {
+          "type": "boolean",
+          "example": true
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-11-07T19:27:15.645Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-11-07T19:27:15.645Z"
+        }
+      }
+    },
+    "CreateLinguagemProgramacaoDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Python"
+        },
+        "versao": {
+          "type": "string",
+          "example": "3.12"
+        }
+      }
+    },
+    "UpdateLinguagemProgramacaoDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Python"
+        },
+        "versao": {
+          "type": "string",
+          "example": "3.12"
+        }
+      }
+    },
+    "AreaConhecimento": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+        },
+        "nome": {
+          "type": "string",
+          "example": "CI/CD"
+        },
+        "versao": {
+          "type": "string",
+          "example": "3.12"
+        },
+        "ativo": {
+          "type": "boolean",
+          "example": true
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-11-07T19:27:15.645Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-11-07T19:27:15.645Z"
+        }
+      }
+    },
+    "CreateAreaConhecimentoDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "CI/CD"
+        },
+        "versao": {
+          "type": "string",
+          "example": "3.12"
+        }
+      }
+    },
+    "UpdateAreaConhecimentoDto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "CI/CD"
+        },
+        "versao": {
+          "type": "string",
+          "example": "3.12"
         }
       }
     }
