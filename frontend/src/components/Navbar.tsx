@@ -1,59 +1,162 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { profile } from "../data/portfolio";
+import type { ThemeName } from "../pages/Index";
 
-export default function Navbar({titulo}: {titulo: string}) {
-    const [menuOpen, setMenuOpen] = useState(false);
-    
-    return (
-        <nav className="bg-white shadow-md fixed top-0 w-full z-10">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            {/* Logo / Nome */}
-            <h1 className="text-xl font-bold text-gray-800">{titulo}</h1>
+const links = [
+  { href: "#sobre", label: "Sobre" },
+  { href: "#stack", label: "Stack" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#contato", label: "Contato" },
+];
 
-            {/* Links - desktop */}
-            <ul className="hidden md:flex space-x-6 text-gray-700">
-              <li><a href="#sobre" className="hover:text-blue-500">Sobre</a></li>
-              <li><a href="#projetos" className="hover:text-blue-500">Projetos</a></li>
-              <li><a href="#contato" className="hover:text-blue-500">Contato</a></li>
-            </ul>
+const themes: Array<{ id: ThemeName; label: string }> = [
+  { id: "earth", label: "Earth" },
+  { id: "graphite", label: "Graphite" },
+  { id: "dark", label: "Dark" },
+  { id: "vivid", label: "Vivid" },
+];
 
-            {/* Botão menu mobile */}
-            <button
-              className="md:hidden text-gray-700 focus:outline-none"
-              onClick={() => setMenuOpen(!menuOpen)}
+type NavbarProps = {
+  theme: ThemeName;
+  onThemeChange: (theme: ThemeName) => void;
+};
+
+export default function Navbar({ theme, onThemeChange }: NavbarProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <nav className="section-frame sticky top-0 z-50 px-4 pt-3 sm:px-6">
+      <div className="neo-card navbar-shell mx-auto flex w-full items-center justify-between bg-[var(--yellow)] px-5 py-4">
+        <a href="#inicio" className="flex items-center gap-3">
+          <span className="inline-flex h-11 w-11 items-center justify-center border-4 border-[var(--border-hard)] bg-[var(--blue)] font-display text-sm text-white">
+            FG
+          </span>
+          <div>
+            <p className="font-display text-base text-black">
+              {profile.name}
+            </p>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-black/70">
+              Portfolio
+            </p>
+          </div>
+        </a>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <div className="theme-dropdown neo-card bg-[var(--bg-panel)] px-3 py-2">
+            <label className="theme-dropdown-label" htmlFor="theme-select-desktop">
+              Tema
+            </label>
+            <select
+              id="theme-select-desktop"
+              className="theme-select"
+              value={theme}
+              onChange={(event) => onThemeChange(event.target.value as ThemeName)}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {menuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
+              {themes.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
           </div>
 
-        {/* Menu mobile */}
-        {menuOpen && (
-          <ul className="md:hidden px-4 pb-4 space-y-2 text-gray-700 bg-white">
-            <li><a href="#sobre" onClick={() => setMenuOpen(false)} className="block hover:text-blue-500">Sobre</a></li>
-            <li><a href="#projetos" onClick={() => setMenuOpen(false)} className="block hover:text-blue-500">Projetos</a></li>
-            <li><a href="#contato" onClick={() => setMenuOpen(false)} className="block hover:text-blue-500">Contato</a></li>
+          <ul className="flex items-center gap-3 text-sm font-extrabold uppercase tracking-[0.08em] text-black">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a className="sticker bg-white transition hover:-rotate-2" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                className="neo-button bg-[var(--blue)] text-white"
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </li>
           </ul>
-        )}
-        </nav>
-    );
+        </div>
+
+        <button
+          className="inline-flex h-11 w-11 items-center justify-center border-4 border-[var(--border-hard)] bg-[var(--blue)] text-white lg:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          type="button"
+          aria-label="Abrir menu"
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            {menuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {menuOpen && (
+        <div className="neo-card navbar-shell mx-auto mt-3 w-full bg-white px-6 py-4 lg:hidden">
+          <div className="theme-dropdown mb-5 bg-[var(--bg-panel)] p-3">
+            <label className="theme-dropdown-label" htmlFor="theme-select-mobile">
+              Tema
+            </label>
+            <select
+              id="theme-select-mobile"
+              className="theme-select"
+              value={theme}
+              onChange={(event) => onThemeChange(event.target.value as ThemeName)}
+            >
+              {themes.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <ul className="space-y-4 text-sm font-bold uppercase tracking-[0.08em] text-black">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a
+                  className="block border-b-4 border-black pb-2"
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                className="neo-button justify-center bg-[var(--blue)] text-white"
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setMenuOpen(false)}
+              >
+                Ver GitHub
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+    </nav>
+  );
 }
